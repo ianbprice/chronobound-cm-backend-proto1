@@ -1,0 +1,100 @@
+
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ChronoBound CM API",
+    "description": "API for ChronoBound's interactive ChronoMaster backend.",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://chronobound-cm-api.onrender.com"
+    }
+  ],
+  "paths": {
+    "/character/create": {
+      "post": {
+        "operationId": "createCharacter",
+        "summary": "Create a new character",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "class": { "type": "string" },
+                  "timeline": { "type": "string" },
+                  "trait": { "type": "string" }
+                },
+                "required": ["name", "class"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Character created successfully"
+          }
+        }
+      }
+    },
+    "/memory/{playerId}": {
+      "get": {
+        "operationId": "getMemory",
+        "summary": "Retrieve memory for a player",
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Memory retrieved"
+          }
+        }
+      }
+    },
+    "/combat/initiate": {
+      "post": {
+        "operationId": "initiateCombat",
+        "summary": "Roll initiative for combat",
+        "responses": {
+          "200": {
+            "description": "Initiative rolled"
+          }
+        }
+      }
+    },
+    "/image/generate": {
+      "post": {
+        "operationId": "generateImage",
+        "summary": "Generate an illustrative scene image",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": { "type": "string" },
+                  "style": { "type": "string" }
+                },
+                "required": ["description"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Image URL returned"
+          }
+        }
+      }
+    }
+  }
+}
